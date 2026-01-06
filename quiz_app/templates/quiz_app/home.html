@@ -1,0 +1,21 @@
+{% extends "quiz_app/base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Available Quizzes</h2>
+<div class="row">
+    {% for quiz in quizzes %}
+        <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">{{ quiz.title }}</h5>
+                    <p class="card-text">{{ quiz.description|truncatewords:20 }}</p>
+                    <a href="{% url 'take_quiz' quiz.id %}" class="btn btn-primary">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No quizzes available at the moment.</p>
+    {% endfor %}
+</div>
+{% endblock %}

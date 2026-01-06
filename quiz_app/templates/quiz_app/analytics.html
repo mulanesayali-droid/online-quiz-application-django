@@ -1,0 +1,82 @@
+{% extends "quiz_app/base.html" %}
+{% block title %}Analytics{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <h2 class="text-center mb-4">📊 Analytics Dashboard</h2>
+
+    <!-- SUMMARY CARDS -->
+    <div class="row text-center mb-4">
+        <div class="col-md-3">
+            <div class="card shadow p-3">
+                <h5>Total Quizzes</h5>
+                <h3>{{ total_quizzes }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-3">
+                <h5>Total Attempts</h5>
+                <h3>{{ total_attempts }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-3">
+                <h5>Average Score</h5>
+                <h3>{{ avg_score }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-3">
+                <h5>Best Score</h5>
+                <h3>{{ best_score }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- USER PERFORMANCE -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-primary text-white">
+            Your Performance
+        </div>
+        <div class="card-body">
+            <p><strong>Total Attempts:</strong> {{ user_stats.total }}</p>
+            <p><strong>Average Score:</strong> {{ user_stats.avg|default:"0" }}</p>
+            <p><strong>Best Score:</strong> {{ user_stats.best|default:"0" }}</p>
+        </div>
+    </div>
+
+    <!-- ATTEMPTS PER QUIZ -->
+    <div class="card shadow">
+        <div class="card-header bg-dark text-white">
+            Attempts per Quiz
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Quiz</th>
+                        <th>Attempts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for quiz in attempts_per_quiz %}
+                    <tr>
+                        <td>{{ quiz.quiz__title }}</td>
+                        <td>{{ quiz.attempts }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2">No data available</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

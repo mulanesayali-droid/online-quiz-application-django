@@ -1,0 +1,10 @@
+{% extends "quiz_app/base.html" %}
+{% block title %}Result{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h3>Quiz: {{ quiz.title }}</h3>
+    <p class="fs-4">Score: {{ score }} / {{ total }}</p>
+    <a href="{% url 'home' %}" class="btn btn-primary mt-3">Back to Home</a>
+</div>
+{% endblock %}
